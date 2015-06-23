@@ -13,5 +13,13 @@
 
 Route::get('/','HomeController@getIndex');
 Route::get('login','HomeController@getLogin');
+Route::post('login','HomeController@postLogin');
 Route::get('register', 'HomeController@getRegister');
 Route::post('register', 'HomeController@postUser');
+Route::get('logout', 'HomeController@logout');
+Route::get('admin', 'UsersController@admin');
+
+
+
+
+Route::resource('users', 'UsersController');

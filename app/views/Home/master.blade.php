@@ -9,8 +9,10 @@
         </style>
         {{ HTML::script('js/jquery.js') }}
         {{ HTML::script('js/bootstrap.js') }}
+        {{ HTML::script('js/bootstrap-select.js') }}
         {{ HTML::style('css/style.css') }}
         {{ HTML::style('css/bootstrap.css') }}
+        {{ HTML::style('css/bootstrap-select.css') }}
     </head>
     <body>
         <div class="row-fluid">
@@ -29,8 +31,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            @if(Auth::user())
-                                <li><a href="#">Welcome {{ucwords(Auth::user()->firtsname)}} {{ucwords(Auth::user()->lastname)}}</a></li>
+                            @if(Auth::user() && Auth::user()->role == 'admin')
+                                <li><a href="#">Welcome {{ucwords(Auth::user()->firtsname)}}</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -41,9 +43,11 @@
                                         <li><a href="#">Separated link</a></li>
                                     </ul>
                                 </li>
+                                <li>{{ HTML::link('/admin', 'Users') }}</li>
+                                <li>{{ HTML::link('register', 'Create User') }}</li>
+                                <li>{{ HTML::link('logout', 'Logout') }}</li>
                             @else
                                 <li>{{ HTML::link('login', 'Login') }}</li>
-                                <li>{{ HTML::link('register', 'Create User') }}</li>
                             @endif
                         </ul>
                     </div><!-- /.navbar-collapse -->

@@ -25,6 +25,32 @@ class HomeController extends BaseController {
         return View::make('Home.login');
     }
 
+    public function  postLogin(){
+        $input = Input::all();
+
+        $rules =array(
+            'email' => 'required',
+            'password' => 'required'
+        );
+
+        $valid = Validator::make($input,$rules);
+
+        if($valid->fails()){
+            return Redirect::to('login')->withErrors($valid);
+        }else{
+            $credentials = array('email' => $input['email'], 'password' => $input['password']);
+
+            if(Auth::attempt($credentials)){
+                if(Auth::user()->role == "admin"){
+                    return Redirect::to('/admin')->with('message', 'Successfully logged into
+                     your Admin account');;
+                }
+            }else{
+                return Redirect::to('login');
+            }
+        }
+    }
+
     public function getRegister(){
         $roles = array(
             'admin' => 'admin',
@@ -67,9 +93,14 @@ class HomeController extends BaseController {
             $user->password = $password;
             $user->save();
 
-            return Redirect::to('login')->with('message', 'User Created');
+            return Redirect::to('/admin')->with('message', 'User Created');
         }else{
             return Redirect::to('register')->withInput()->withErrors($valid);
         }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return Redirect::to('/')->with('message', 'User logged out');;
     }
 }

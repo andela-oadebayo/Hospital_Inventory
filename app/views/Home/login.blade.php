@@ -18,7 +18,7 @@
                     @endif
                     {{ Form::text('email', '', array('placeholder' => 'Email Address', 'class' => 'form-control input-sm')) }}<br>
 
-                    {{ Form::text('password', '', array('placeholder' => 'Password', 'class' => 'form-control input-sm')) }}<br>
+                    {{ Form::password('password', array('placeholder' => 'Password', 'class' => 'form-control input-sm')) }}<br>
 
                     {{ Form::submit('Login', array('class' => 'btn btn-info btn-block'))}}
                 {{Form::close()}}
