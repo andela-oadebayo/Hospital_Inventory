@@ -1,5 +1,4 @@
 <?php
-use Helpers\Helper;
 
 class HomeController extends BaseController {
 
@@ -43,7 +42,13 @@ class HomeController extends BaseController {
             if(Auth::attempt($credentials)){
                 if(Auth::user()->role == "admin"){
                     return Redirect::to('/admin')->with('message', 'Successfully logged into
-                     your Admin account');;
+                     your Admin account');
+                }elseif(Auth::user()->role == "pharmacy1"){
+                    return Redirect::to('/inventory-1')->with('message', 'Successfully logged into
+                     your User account');
+                }elseif(Auth::user()->role == "pharmacy2"){
+                    return Redirect::to('/inventory-2')->with('message', 'Successfully logged into
+                     your User account');
                 }
             }else{
                 return Redirect::to('login');
@@ -55,13 +60,7 @@ class HomeController extends BaseController {
         $roles = array(
             'admin' => 'admin',
             'pharmacy1' => 'Manager(Pharmacy_1)',
-            'pharmacy2' => 'Manager(Pharmacy_2)',
-            'pharmacy3' => 'Manager(Pharmacy_3)',
-            'pharmacy4' => 'Manager(Pharmacy_4)',
-            'pharmacy5' => 'Manager(Pharmacy_5)',
-            'pharmacy6' => 'Manager(Pharmacy_6)',
-            'pharmacy7' => 'Manager(Pharmacy_7)',
-            'pharmacy8' => 'Manager(Pharmacy_8)',
+            'pharmacy2' => 'Manager(Pharmacy_2)'
         );
         return View::make('Home.register')
                     ->with('roles',$roles);

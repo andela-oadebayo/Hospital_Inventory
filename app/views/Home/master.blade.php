@@ -32,19 +32,27 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             @if(Auth::user() && Auth::user()->role == 'admin')
-                                <li><a href="#">Welcome {{ucwords(Auth::user()->firtsname)}}</a></li>
+                                <li><a href="#">Welcome {{ucwords(Auth::user()->firstname)}}</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
+                                        <li>{{ HTML::link('/inventory-1', 'Pharmacy-1') }}</li>
+                                        <li>{{ HTML::link('/inventory-2', 'Pharmacy-2') }}</li>
                                     </ul>
                                 </li>
+                                <li><a href="{{ URL::to('pharmacy/create') }}">Add Item</a></li>
                                 <li>{{ HTML::link('/admin', 'Users') }}</li>
                                 <li>{{ HTML::link('register', 'Create User') }}</li>
+                                <li>{{ HTML::link('logout', 'Logout') }}</li>
+                            @elseif(Auth::user() && Auth::user()->role == 'pharmacy1')
+                                <li><a href="#">Welcome {{ucwords(Auth::user()->firstname)}}</a></li>
+                                <li><a href="{{ URL::to('inventory-1') }}">Home</a></li>
+                                <li><a href="{{ URL::to('pharmacy/create') }}">Add Item</a></li>
+                                <li>{{ HTML::link('logout', 'Logout') }}</li>
+                            @elseif(Auth::user() && Auth::user()->role == 'pharmacy2')
+                                <li><a href="#">Welcome {{ucwords(Auth::user()->firstname)}}</a></li>
+                                <li><a href="{{ URL::to('pharmacy/create') }}">Add Item</a></li>
+                                <li><a href="{{ URL::to('inventory-2') }}">Home</a></li>
                                 <li>{{ HTML::link('logout', 'Logout') }}</li>
                             @else
                                 <li>{{ HTML::link('login', 'Login') }}</li>

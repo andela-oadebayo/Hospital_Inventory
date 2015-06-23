@@ -19,7 +19,9 @@ Route::post('register', 'HomeController@postUser');
 Route::get('logout', 'HomeController@logout');
 Route::get('admin', 'UsersController@admin');
 
+Route::resource('pharmacy', 'PharmaciesController');
 
-
+Route::get('/inventory-1', 'PharmaciesController@inventOne');
+Route::get('/inventory-2', 'PharmaciesController@inventTwo');
 
 Route::resource('users', 'UsersController');

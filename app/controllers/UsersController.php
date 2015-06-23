@@ -65,15 +65,8 @@ class UsersController extends BaseController {
         $roles = array(
             'admin' => 'admin',
             'pharmacy1' => 'Manager(Pharmacy_1)',
-            'pharmacy2' => 'Manager(Pharmacy_2)',
-            'pharmacy3' => 'Manager(Pharmacy_3)',
-            'pharmacy4' => 'Manager(Pharmacy_4)',
-            'pharmacy5' => 'Manager(Pharmacy_5)',
-            'pharmacy6' => 'Manager(Pharmacy_6)',
-            'pharmacy7' => 'Manager(Pharmacy_7)',
-            'pharmacy8' => 'Manager(Pharmacy_8)',
+            'pharmacy2' => 'Manager(Pharmacy_2)'
         );
-
         $user = \User::find($id);
         return View::make('User.edit', array('user'=>$user, 'roles'=>$roles));
 	}
